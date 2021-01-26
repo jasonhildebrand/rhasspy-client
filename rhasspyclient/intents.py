@@ -1,6 +1,7 @@
 import asyncio
 import websockets
 import json
+from urllib.parse import urljoin
 
 
 def is_intent(func):
@@ -36,9 +37,9 @@ class IntentHandler(object):
         return self.intent_resolver.get(intent_name)
 
     async def get_event(self):
-        uri = "ws://raspberrypi.local:12101/api/events/intent"
+        url = urljoin(self.client.api_url, 'events/intent').replace('https', 'ws').replace('http', 'ws')
         global timers
-        async with websockets.connect(uri) as websocket:
+        async with websockets.connect(url) as websocket:
             intent = await websocket.recv()
             intent = json.loads(intent)
             print(f"< {intent}")
