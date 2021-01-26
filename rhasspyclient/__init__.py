@@ -16,6 +16,8 @@ import aiohttp
 
 from rhasspyclient.speech import Transcription, TranscriptionResult
 from rhasspyclient.train import TrainingComplete, TrainingResult
+from rhasspyclient.intents import IntentHandler, IntentAction, is_intent
+
 
 _LOGGER = logging.getLogger(__name__)
 
